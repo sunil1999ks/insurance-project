@@ -10,7 +10,7 @@ const AuthModal = () => {
       {/* Trigger Button */}
       <button
         type="button"
-        className="btn btn-primary"
+        className="btn btn-danger"
         data-bs-toggle="modal"
         data-bs-target="#authModal"
       >
@@ -66,7 +66,7 @@ const AuthModal = () => {
                         Remember me
                       </label>
                     </div>
-                    <a href="#" className="small text-primary">Forgot password?</a>
+                    <a href="#" className="small text-danger">Forgot password?</a>
                   </div>
                 </form>
               ) : (
@@ -112,7 +112,7 @@ const AuthModal = () => {
                 <button type="button" className="btn btn-light border" data-bs-dismiss="modal">
                   Cancel
                 </button>
-                <button type="button" className="btn btn-primary px-4">
+                <button type="button" className="btn btn-danger px-4">
                   {isLogin ? 'Login' : 'Register'}
                 </button>
               </div>

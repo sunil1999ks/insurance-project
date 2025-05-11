@@ -1,73 +1,116 @@
+
+
 import React, { useState } from 'react';
-import logo from "./../images/id-main-logo.svg";
-import "./Navbar.css"; // Import the CSS file we'll write below
-import AuthModal from './AuthModal';
-import { toast, ToastContainer } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import { Modal } from 'bootstrap';
+import logo from "./../images/id-main-logo.svg";
 
 const Navbar = () => {
 
+ 
+  const [isLogin, setIsLogin] = useState(true);
+  const toggleForm = () => setIsLogin(!isLogin);
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
   const [isOpen3, setIsOpen3] = useState(false);
-
-  const [isLogin, setIsLogin] = useState(true);
-
-  const toggleForm = () => setIsLogin(!isLogin);
-
-
   const [userValues, setUserValues] = useState({
     email: "",
     name: "",
     password: "",
     role: "user"
-  })
+  });
+
+  const [loginValues, setLoginValues] = useState({
+    inp_email: "",
+    inp_password: "",
+  });
+
+  const handleLoginSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post("http://localhost:5000/api/users/login", loginValues);
+      console.log(res.data);
+     
+      
+      navigate("dashboard");
+
+      // Close modal after login
+      const modalElement = document.getElementById('exampleModal');
+      const modalInstance = Modal.getInstance(modalElement);
+      if (modalInstance) {
+        modalInstance.hide();
+      }
+
+      const backdrop = document.querySelector('.modal-backdrop');
+      if (backdrop) {
+        backdrop.remove();
+      }
+
+
+       const paredData = JSON.stringify(res.data.user)
+     
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("user", paredData);
+
+    } catch (err) {
+      console.log(err);
+      toast.error("Invalid email or password");
+    }
+  };
 
 
   const handleRegisterSubmit = (e) => {
-    e.preventDefault()
-   
-
+    e.preventDefault();
 
     axios.post("http://localhost:5000/api/users/register", userValues)
       .then(res => {
         console.log(res.data);
-        toast.success("Registration successful ")
+        toast.success("Registration successful");
+
+        // Close modal after registration
+        const modalElement = document.getElementById('exampleModal');
+        const modalInstance = Modal.getInstance(modalElement);
+        if (modalInstance) {
+          modalInstance.hide();
+        }
+
+        const backdrop = document.querySelector('.modal-backdrop');
+        if (backdrop) {
+          backdrop.remove();
+        }
 
       }).catch(err => {
         console.log(err);
-        toast.error("something went wrong")
+        toast.error("Something went wrong");
+      });
+  };
 
-      })
-
-
-
-  }
-
-  const handleChange = (e) => {
+  const handleChangeForRegister = (e) => {
     const { name, value } = e.target;
     setUserValues((prevState) => ({ ...prevState, [name]: value }));
   };
 
+  const handleChangeForLogin = (e) => {
+    const { name, value } = e.target;
+    setLoginValues((prevState) => ({ ...prevState, [name]: value }));
+  };
 
   return (
-
     <>
-
-      <ToastContainer
-        position="bottom-right"
-        autoClose={5000}
-
-      />
+      <ToastContainer position="bottom-right" autoClose={5000} />
       <nav className="navbar bg-white shadow-sm border-bottom sticky-top py-2">
         <div className="w-100 d-flex justify-content-between align-items-center px-4 px-md-5">
-
           {/* Logo */}
           <a className="navbar-brand d-flex align-items-center me-4" href="#">
             <img src={logo} alt="Logo" width="180" height="50" />
           </a>
 
-          {/* Main Nav */}
+
           <ul className="nav gap-4 d-none d-lg-flex align-items-center">
             <div
               className="dropdown hover-dropdown"
@@ -377,91 +420,37 @@ const Navbar = () => {
               aria-label="Search"
               style={{ width: '180px' }}
             />
-            <button className="btn btn-primary rounded-pill px-4 " type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-
+            <button className="btn btn-danger rounded-pill px-4" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
               Login
-            </button>
-
-            {/* Mobile Toggler */}
-            <button
-              className="navbar-toggler d-lg-none border-0"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarCollapseMobile"
-              aria-controls="navbarCollapseMobile"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span className="navbar-toggler-icon"></span>
             </button>
           </div>
         </div>
-
-        {/* Mobile Collapsible Nav */}
-        <div className="collapse navbar-collapse d-lg-none px-4" id="navbarCollapseMobile">
-          <ul className="navbar-nav py-3 border-top">
-            <li className="nav-item"><a className="nav-link fw-medium text-dark" href="#">Insurance</a></li>
-            <li className="nav-item"><a className="nav-link fw-medium text-dark" href="#">Advisors</a></li>
-            <li className="nav-item"><a className="nav-link fw-medium text-dark" href="#">Renew</a></li>
-            <li className="nav-item"><a className="nav-link fw-medium text-dark" href="#">Support</a></li>
-            <li className="nav-item"><a className="nav-link fw-medium text-dark" href="#">News</a></li>
-            <li className="nav-item"><a className="nav-link fw-medium text-dark" href="#">Become POSP Agent</a></li>
-          </ul>
-        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       </nav>
 
-
-
-
-
-
-
-      <div
-        class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
-      >
+      {/* Auth Modal */}
+      <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content border-0 shadow-lg rounded-4">
-
             <div className="modal-header border-0 pb-0">
               <h5 className="modal-title fw-semibold" id="authModalLabel">
                 {isLogin ? 'Welcome Back 👋' : 'Create an Account ✨'}
               </h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
+              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
             <div className="modal-body pt-0">
               {isLogin ? (
-                <form>
+                <form onSubmit={handleLoginSubmit}>
                   <div className="mb-4">
                     <label className="form-label fw-medium">Email</label>
                     <input
                       type="email"
                       className="form-control form-control-lg rounded-3 shadow-sm"
                       placeholder="you@example.com"
+                      name="inp_email"
+                      value={loginValues.inp_email}
+                      onChange={handleChangeForLogin}
+                      required
                     />
                   </div>
                   <div className="mb-4">
@@ -470,28 +459,15 @@ const Navbar = () => {
                       type="password"
                       className="form-control form-control-lg rounded-3 shadow-sm"
                       placeholder="••••••••"
+                      name="inp_password"
+                      value={loginValues.inp_password}
+                      onChange={handleChangeForLogin}
+                      required
                     />
                   </div>
-                  <div className="mb-3 d-flex justify-content-between align-items-center">
-                    <div className="form-check">
-                      <input className="form-check-input" type="checkbox" id="rememberMe" />
-                      <label className="form-check-label" htmlFor="rememberMe">
-                        Remember me
-                      </label>
-                    </div>
-                    <a href="#" className="small text-primary">Forgot password?</a>
-                  </div>
-
-
                   <div className="w-100 d-flex justify-content-between">
-
-                    <button type="submit" className="btn btn-primary px-4">
-                      {isLogin ? 'Login' : 'Register'}
-                    </button>
+                    <button type="submit" className="btn btn-danger px-4">Login</button>
                   </div>
-
-
-
                 </form>
               ) : (
                 <form onSubmit={handleRegisterSubmit}>
@@ -501,20 +477,22 @@ const Navbar = () => {
                       type="text"
                       className="form-control form-control-lg rounded-3 shadow-sm"
                       placeholder="John Doe"
-                      name='name'
+                      name="name"
                       value={userValues.name}
-                      onChange={handleChange}
+                      onChange={handleChangeForRegister}
+                      required
                     />
                   </div>
                   <div className="mb-4">
                     <label className="form-label fw-medium">Email</label>
                     <input
-                      type="name"
+                      type="email"
                       className="form-control form-control-lg rounded-3 shadow-sm"
                       placeholder="you@example.com"
-                      name='email'
+                      name="email"
                       value={userValues.email}
-                      onChange={handleChange}
+                      onChange={handleChangeForRegister}
+                      required
                     />
                   </div>
                   <div className="mb-4">
@@ -523,53 +501,31 @@ const Navbar = () => {
                       type="password"
                       className="form-control form-control-lg rounded-3 shadow-sm"
                       placeholder="Create password"
-                      name='password'
+                      name="password"
                       value={userValues.password}
-                      onChange={handleChange}
+                      onChange={handleChangeForRegister}
+                      required
                     />
                   </div>
-                  <div className="mb-4">
-                    <label className="form-label fw-medium">Confirm Password</label>
-                    <input
-                      type="password"
-                      className="form-control form-control-lg rounded-3 shadow-sm"
-                      placeholder="Repeat password"
-                    />
-                  </div>
-
-
                   <div className="w-100 d-flex justify-content-between">
-
-                    <button type="submit" className="btn btn-primary px-4">
-                      {isLogin ? 'Login' : 'Register'}
-                    </button>
+                    <button type="submit" className="btn btn-danger px-4">Register</button>
                   </div>
-
                 </form>
               )}
             </div>
 
             <div className="modal-footer border-0 pt-0 d-flex flex-column">
-
               <small className="mt-3">
                 {isLogin ? "Don't have an account?" : "Already have an account?"}
-                <button
-                  className="btn btn-link p-0 ms-1"
-                  type="button"
-                  onClick={toggleForm}
-                >
+                <button className="btn btn-link p-0 ms-1" type="button" onClick={toggleForm}>
                   {isLogin ? 'Register' : 'Login'}
                 </button>
               </small>
             </div>
-
           </div>
         </div>
       </div>
-
-
     </>
-
   );
 };
 

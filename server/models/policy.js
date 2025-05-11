@@ -10,7 +10,7 @@ const policySchema = new mongoose.Schema({
   },
   coverageType: {
     type: String,
-    enum: ['health', 'auto','bike', 'cars', 'life', 'home'],
+    enum: ['Health', 'Car', 'Bike', 'Life'],
     required: true,
   },
   startDate: {

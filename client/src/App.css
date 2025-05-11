@@ -1,3 +1,11 @@
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+
+
 .card{
  
   border-radius: 2em;
@@ -70,7 +78,7 @@
   margin-top: 0.6rem;
 }
 
-/* Nested submenu styling */
+
 .dropdown-submenu {
   position: relative;
 }
@@ -89,3 +97,37 @@
 
 
 
+
+/* Make the sidebar items bigger */
+.nav-link {
+  font-size: 18px;
+  font-weight: 600;  
+  padding: 12px 20px; 
+  border-radius: 10px;  
+}
+
+/* Make the icons bigger */
+.nav-link .fa {
+  font-size: 22px; 
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Hover effect with larger icons */
+.nav-link:hover .fa {
+  transform: scale(1.1);  
+}
+
+/* Active link state with bigger font and icon */
+.nav-link.active {
+  background-color: #dc3545; 
+  color: white;
+  border-left: 4px solid #dc3545; 
+  font-size: 20px;  
+}
+
+/* Shadow effect for items */
+.nav-link:hover {
+  background-color: #f0f0f0;
+  border-radius: 12px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

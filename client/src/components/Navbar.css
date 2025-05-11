@@ -91,11 +91,11 @@
   padding: 0.5rem;
 }
 
-.btn-primary {
-  background-color: #4a90e2;
+.btn-danger {
+  background-color: #bd3535;
   border: none;
 }
 
-.btn-primary:hover {
-  background-color: #357abd;
+.btn-danger:hover {
+  background-color: #bd3535;
 }

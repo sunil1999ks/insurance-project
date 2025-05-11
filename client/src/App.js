@@ -1,18 +1,21 @@
 import React from 'react'
-import Navbar from './components/Navbar'
-import Carousel from './components/Carousel'
-import InsuranceServices from './components/InsuranceServices'
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import Homepage from './pages/Homepage'
+import Dashboard from './layouts/Dashboard'
 
 
 const App = () => {
   return (
     <div>
-      <Navbar/>
-      <Carousel/>
-      <InsuranceServices/>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Homepage />} />
+          <Route path='/dashboard/*' element={<Dashboard/>}/>
+        </Routes>
+      </BrowserRouter>
 
 
- 
+
     </div>
   )
 }
