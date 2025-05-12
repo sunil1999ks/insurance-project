@@ -31,9 +31,9 @@ const Sidebar = () => {
             path: '/dashboard/payments', 
             label: 'Payments', 
             icon: <FaFileAlt />, 
-            // roles: ['admin'] // Only visible to admin
+            roles: ['user'] // Only visible to admin
         },
-        { path: '/dashboard/settings', label: 'Settings', icon: <FaCog /> },
+        { path: '/dashboard/settings', label: 'Profile', icon: <FaCog /> },
     ];
 
     const filteredNavItems = navItems.filter(item => {

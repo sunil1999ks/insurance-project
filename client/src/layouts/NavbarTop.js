@@ -58,7 +58,7 @@ const NavbarTop = () => {
 
 
                     <Dropdown.Menu>
-                        <Dropdown.Item onClick={() => navigate("/dashboard/settings")}>Settings</Dropdown.Item>
+                        <Dropdown.Item onClick={() => navigate("/dashboard/settings")}>Profile</Dropdown.Item>
                         <Dropdown.Divider />
                         <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
                     </Dropdown.Menu>
