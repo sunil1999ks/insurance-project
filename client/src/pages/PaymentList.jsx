@@ -31,7 +31,7 @@ const PaymentList = () => {
 
   const getClaimRequests = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/payments/listPayments", {
+      const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/payments/listPayments`, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`, // Include token in the Authorization header

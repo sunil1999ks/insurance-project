@@ -96,7 +96,7 @@ const CreateInsurance = () => {
   e.preventDefault();
   try {
     const res = await axios.post(
-      "http://localhost:5000/api/policies/createPolicy",
+      `${process.env.REACT_APP_SERVER_URL}/api/policies/createPolicy`,
       formValues,
       {
         headers: {

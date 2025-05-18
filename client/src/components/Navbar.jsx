@@ -33,7 +33,7 @@ const Navbar = () => {
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/api/users/login", loginValues);
+      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/users/login`, loginValues);
       console.log(res.data);
      
       
@@ -67,7 +67,7 @@ const Navbar = () => {
   const handleRegisterSubmit = (e) => {
     e.preventDefault();
 
-    axios.post("http://localhost:5000/api/users/register", userValues)
+    axios.post(`${process.env.REACT_APP_SERVER_URL}/api/users/register`, userValues)
       .then(res => {
         console.log(res.data);
         toast.success("Registration successful");

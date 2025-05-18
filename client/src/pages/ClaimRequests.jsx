@@ -31,7 +31,8 @@ const ClaimRequests = () => {
 
   const getClaimRequests = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/claims/listClaims", {
+      const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/claims/listClaims`, {
+
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`, // Include token in the Authorization header
@@ -180,7 +181,7 @@ const ClaimRequests = () => {
 
 
     try {
-      const res = await axios.put(`http://localhost:5000/api/claims/${id}/status`, {
+      const res = await axios.put(`${process.env.REACT_APP_SERVER_URL}/api/claims/${id}/status`, {
         status: "approved"
       }, {
         headers: {
@@ -203,7 +204,7 @@ const ClaimRequests = () => {
 
 
     try {
-      const res = await axios.put(`http://localhost:5000/api/claims/${id}/status`, {
+      const res = await axios.put(`${process.env.REACT_APP_SERVER_URL}/api/claims/${id}/status`, {
         status: "rejected"
       }, {
         headers: {

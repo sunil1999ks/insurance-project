@@ -15,11 +15,17 @@ connectDB()
 
 
 
-const corsOptions = {
-    origin: 'http://localhost:3000',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], 
-    credentials: true,
-  };
+// const corsOptions = {
+//     origin: 'http://localhost:3000',
+//     methods: ['GET', 'POST', 'PUT', 'DELETE'], 
+//     credentials: true,
+//   };
+
+  const corsOptions = {
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: false, // credentials cannot be true when origin is '*'
+};
   
   app.use(cors(corsOptions));
 

@@ -52,7 +52,7 @@ const ListInsurance = () => {
 
   const getListInsurance = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/policies/getUserPolicies", {
+      const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/policies/getUserPolicies`, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
@@ -185,7 +185,7 @@ const ListInsurance = () => {
 
 
     try {
-      const res = await axios.post("http://localhost:5000/api/claims/createClaim", formValues, {
+      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/claims/createClaim`, formValues, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
@@ -212,7 +212,7 @@ const ListInsurance = () => {
 
 
     try {
-      const res = await axios.delete(`http://localhost:5000/api/policies/${id}`, {
+      const res = await axios.delete(`${process.env.REACT_APP_SERVER_URL}/api/policies/${id}`, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`, // Include token in the Authorization header
@@ -235,7 +235,7 @@ const ListInsurance = () => {
 
 
     try {
-      const res = await axios.post(`http://localhost:5000/api/payments/createPayment`,{policyId: id ,amount:premiumAmount }, {
+      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/payments/createPayment`,{policyId: id ,amount:premiumAmount }, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`, // Include token in the Authorization header
