@@ -1,7 +1,7 @@
 
 
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -106,9 +106,9 @@ const Navbar = () => {
       <nav className="navbar bg-white shadow-sm border-bottom sticky-top py-2">
         <div className="w-100 d-flex justify-content-between align-items-center px-4 px-md-5">
           {/* Logo */}
-          <a className="navbar-brand d-flex align-items-center me-4" href="#">
+          <Link to="/" className="navbar-brand d-flex align-items-center me-4" href="#">
             <img src={logo} alt="Logo" width="180" height="50" />
-          </a>
+          </Link>
 
 
           <ul className="nav gap-4 d-none d-lg-flex align-items-center">
@@ -132,7 +132,7 @@ const Navbar = () => {
               <ul className={`dropdown-menu ${isOpen ? 'show' : ''} gap-2`}>
 
                 <li className="dropdown-submenu d-flex align-items-center gap-2">
-                  <a className="dropdown-item dropdown-toggle" href="/health-insurance">
+                  <a className="dropdown-item dropdown-toggle" href="/HealthInsuranceForm">
                     <img
                       width="24"
                       height="24"
@@ -167,7 +167,7 @@ const Navbar = () => {
 
 
                 <li className="dropdown-submenu">
-                  <a className="dropdown-item dropdown-toggle" href="/car-insurance">
+                  <a className="dropdown-item dropdown-toggle" href="/CarInsuranceForm">
                     <img
                       width="24"
                       height="24"
@@ -187,7 +187,7 @@ const Navbar = () => {
 
 
                 <li className="dropdown-submenu">
-                  <a className="dropdown-item dropdown-toggle" href="/car-insurance">
+                  <a className="dropdown-item dropdown-toggle" href="/BikeInsuranceForm">
                     <img
                       width="24"
                       height="24"

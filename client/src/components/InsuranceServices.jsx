@@ -22,7 +22,7 @@ const InsuranceServices = () => {
             <div class="container card py-5 w-100 ">
                 <div class="row flex g-3 row-cols-1 row-cols-sm-2 row-cols-md-4 item-center">
 
-                    <div class="col d-flex justify-content-center" onClick={hanbdleOnClick}>
+                    <div class="col d-flex justify-content-center" onClick={()=>navigate("CarInsuranceForm")}>
                         <div class="icon-card">
                             <span class="badge badge-custom badge-new">NEW</span>
                             <img src="https://www.insurancedekho.com/pwa/img/v2_icon_car.svg" alt="Car" />
@@ -32,7 +32,7 @@ const InsuranceServices = () => {
                     </div>
 
 
-                    <div class="col d-flex justify-content-center" onClick={hanbdleOnClick}>
+                    <div class="col d-flex justify-content-center" onClick={()=>navigate("/BikeInsuranceForm")}>
                         <div class="icon-card">
                             <img src="https://www.insurancedekho.com/pwa/img/v2_icon_bike.svg" alt="Bike" />
                             <div class="icon-title">Bike</div>
@@ -41,7 +41,7 @@ const InsuranceServices = () => {
                     </div>
 
 
-                    <div class="col d-flex justify-content-center" onClick={hanbdleOnClick}>
+                    <div class="col d-flex justify-content-center" onClick={()=>navigate("/HealthInsuranceForm")}>
                         <div class="icon-card">
                             <span class="badge badge-custom badge-offer">Upto 25% Off*</span>
                             <img src="https://www.insurancedekho.com/pwa/img/v2_icon_health.svg" alt="Health" />

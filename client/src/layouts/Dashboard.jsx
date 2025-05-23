@@ -12,6 +12,7 @@ import PaymentList from '../pages/PaymentList';
 
 
 
+
 const Dashboard = () => {
   return (
   
@@ -33,6 +34,7 @@ const Dashboard = () => {
         <Route path='/claim-requests' element={<ClaimRequests />} />
         <Route path='/payments' element={<PaymentList />} />
         <Route path='/settings' element={<Settings />} />
+     
       </Routes>
       <Outlet />
     </div>
